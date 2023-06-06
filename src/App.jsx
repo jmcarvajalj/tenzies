@@ -15,7 +15,7 @@ export default function App() {
   //state to check stopwatch running or not
   const [isRunning, setIsRunning] = useState(false)
   //state to manage best score
-  const [bestTime, setBestTime] = useState(0)
+  const [bestTime, setBestTime] = useState(JSON.parse(localStorage.getItem("bestTime")) || 0)
 
   //useEffect to manage time
   useEffect(() => {
@@ -24,7 +24,6 @@ export default function App() {
       // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
       intervalId = setInterval(() => setTime(time + 1), 10);
     }
-    setBestTime(time)
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
 
@@ -36,8 +35,15 @@ export default function App() {
     if (allHeld && allSameValue) {
       setTenzies(true)
       setIsRunning(false)
+      if (!bestTime || time < bestTime) {
+        setBestTime(time);
+      }    
     }
-  }, [dice])
+  }, [dice, bestTime, time])  
+
+  useEffect(() => {
+    localStorage.setItem("bestTime", JSON.stringify(bestTime));
+  }, [bestTime]);
 
   function generateNewDie() {
     return {
@@ -68,7 +74,7 @@ export default function App() {
       setTenzies(false)
       setDice(allNewDice())
       setRolls(0)
-      setTime(0)
+      setTime(0)   
     }
   }
 
@@ -154,4 +160,3 @@ export default function App() {
     </main>
   )
 }
-//TODO: ADD BEST TIME TO LOCALSTORAGE
