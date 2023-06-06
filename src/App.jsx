@@ -60,6 +60,12 @@ export default function App() {
     }))
   }
 
+  function newGame() {
+    setTenzies(false)
+    setDice(allNewDice())
+    setRolls(0)
+  }
+
   const diceElements = dice.map(die => (
     <Die
       key={die.id}
@@ -75,18 +81,32 @@ export default function App() {
       <h1 className="title">Tenzies</h1>
       <p className="instructions">Roll until all dice are the same as fast as you can.<br /><br />
         Click each die to freeze it at its current value between rolls.</p>
-
       <div className="dice-container">
         {diceElements}
       </div>
-      <button
-        className="roll-dice"
-        onClick={rollDice}
-      >
-        {tenzies ? "New Game" : "Roll"}
-      </button>
+      <div className="buttons">
+        <button
+          className="roll-dice"
+          onClick={rollDice}
+        >
+          {tenzies ? "New Game" : "Roll"}
+        </button>
+        <button
+          className="new-game"
+          onClick={newGame}
+        >
+          New Game
+        </button>
+      </div>
       <div className="info-container">
-        <p className="number-rolls">Number of rolls: {rolls} </p>
+        <div className="rolls">
+          <p className="number-rolls">Number of rolls</p>
+          <p className="number-rolls">{rolls}</p>
+        </div>
+        <div className="timer">
+          <p className="timer-count">Timer</p>
+          <p className="timer-count">00:00:00</p>
+        </div>
       </div>
     </main>
   )
