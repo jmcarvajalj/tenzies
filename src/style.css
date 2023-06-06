@@ -129,21 +129,11 @@ main {
     align-items: center;
 }
 
-.rolls-header, .rolls-count {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
 .timer {
     display: flex;
     flex-direction: column;
     width:  20%;
     align-items: center;
-}
-
-.timer-header, .timer-count {
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .best-time {
@@ -153,7 +143,7 @@ main {
     align-items: center;
 }
 
-.best-time-header, .best-time-count {
+.rolls-header, .rolls-count, .timer-header, .timer-count, .best-time-header, .best-time-count {
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -161,4 +151,3 @@ main {
 footer {
     font-size: 12px;
 }
-

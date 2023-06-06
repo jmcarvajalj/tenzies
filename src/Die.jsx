@@ -2,7 +2,7 @@
 import { useState } from "react"
 
 export default function Die(props) {
-
+    //state to manage dice hover
     const [hover, setHover] = useState(false)
 
     const styles = {
@@ -13,6 +13,7 @@ export default function Die(props) {
             backgroundColor: "#6FEAA2"
         }
     }
+    
     return (
         <div
             className="die-face"

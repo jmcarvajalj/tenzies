@@ -24,6 +24,7 @@ export default function App() {
       // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
       intervalId = setInterval(() => setTime(time + 1), 10);
     }
+    setBestTime(time)
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
 
@@ -96,17 +97,18 @@ export default function App() {
     />
   ))
 
-  // Minutes calculation
-  const minutes = Math.floor((time % 360000) / 6000)
-  // Seconds calculation
-  const seconds = Math.floor((time % 6000) / 100)
-  // Milliseconds calculation
-  const milliseconds = time % 100
-
-
-  console.log(time)
-  //timer is just a formatted string representation of time
-  const timer = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}:${milliseconds.toString().padStart(2, "0")}`
+  function timer(time) {
+    // Minutes calculation
+    const minutes = Math.floor((time % 360000) / 6000)
+    // Seconds calculation
+    const seconds = Math.floor((time % 6000) / 100)
+    // Milliseconds calculation
+    const milliseconds = time % 100
+    //formatted string representation of time
+    const formattedTimer = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}:${milliseconds.toString().padStart(2, "0")}`
+    
+    return formattedTimer
+  }
 
   return (
     <main>
@@ -140,17 +142,16 @@ export default function App() {
 
         <div className="timer">
           <p className="timer-header">Timer</p>
-          <p className="timer-count">{timer}</p>
+          <p className="timer-count">{timer(time)}</p>
         </div>
 
         <div className="best-time">
           <p className="best-time-header">Best Time</p>
-          <p className="best-time-count">00:00:00</p>
+          <p className="best-time-count">{timer(bestTime)}</p>
         </div>
       </div>
       <footer>Made by José Miguel Carvajal Jiménez</footer>
     </main>
   )
 }
-
 //TODO: ADD BEST TIME TO LOCALSTORAGE
