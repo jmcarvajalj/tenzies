@@ -39,7 +39,7 @@ main {
     display: grid;
     grid-template: auto auto / repeat(5, 1fr);
     gap: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .die-face {
@@ -67,6 +67,8 @@ main {
     font-size: 1.2rem;
     font-family: 'Karla', sans-serif;
     cursor: pointer;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .roll-dice:focus {
@@ -75,4 +77,22 @@ main {
 
 .roll-dice:active {
     box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+    background-color: #492EF7;
+}
+
+.roll-dice:hover {
+    background-color: #492ef7;
+}
+
+.info-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.number-rolls {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: auto;
 }
