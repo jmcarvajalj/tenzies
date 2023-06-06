@@ -91,12 +91,12 @@ export default function App() {
         >
           {tenzies ? "New Game" : "Roll"}
         </button>
-        <button
+        {!tenzies &&<button
           className="new-game"
           onClick={newGame}
         >
           New Game
-        </button>
+        </button>}
       </div>
       <div className="info-container">
         <div className="rolls">
