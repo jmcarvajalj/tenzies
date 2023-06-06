@@ -115,27 +115,21 @@ main {
     background-color: #1950a1;
 }
 
-.info-container-header {
+.info {
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: space-evenly;
-}
-
-.info-container{
-    display: flex;
     width: 100%;
-    align-items: center;
-    justify-content: space-evenly;
 }
 
 .rolls {
     display: flex;
     flex-direction: column;
+    width:  20%;
     align-items: center;
 }
 
-.number-rolls {
+.rolls-header, .rolls-count {
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -143,10 +137,28 @@ main {
 .timer {
     display: flex;
     flex-direction: column;
+    width:  20%;
     align-items: center;
 }
 
-.timer-count {
+.timer-header, .timer-count {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.best-time {
+    display: flex;
+    flex-direction: column;
+    width:  20%;
+    align-items: center;
+}
+
+.best-time-header, .best-time-count {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+footer {
+    font-size: 12px;
+}
+

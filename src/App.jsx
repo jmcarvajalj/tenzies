@@ -10,6 +10,22 @@ export default function App() {
   const [tenzies, setTenzies] = useState(false)
   //state to manage number of rolls
   const [rolls, setRolls] = useState(0)
+  //state to store time
+  const [time, setTime] = useState(0)
+  //state to check stopwatch running or not
+  const [isRunning, setIsRunning] = useState(false)
+  //state to manage best score
+  const [bestTime, setBestTime] = useState(0)
+
+  //useEffect to manage time
+  useEffect(() => {
+    let intervalId;
+    if (isRunning) {
+      // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
+      intervalId = setInterval(() => setTime(time + 1), 10);
+    }
+    return () => clearInterval(intervalId);
+  }, [isRunning, time]);
 
   //useEffect to validate win condition
   useEffect(() => {
@@ -18,6 +34,7 @@ export default function App() {
     const allSameValue = dice.every(die => die.value === firstValue)
     if (allHeld && allSameValue) {
       setTenzies(true)
+      setIsRunning(false)
     }
   }, [dice])
 
@@ -39,6 +56,7 @@ export default function App() {
 
   function rollDice() {
     if (!tenzies) {
+      setIsRunning(true)
       setRolls(prevState => prevState + 1)
       setDice(oldDice => oldDice.map(die => {
         return die.isHeld ?
@@ -49,6 +67,7 @@ export default function App() {
       setTenzies(false)
       setDice(allNewDice())
       setRolls(0)
+      setTime(0)
     }
   }
 
@@ -61,9 +80,11 @@ export default function App() {
   }
 
   function newGame() {
+    setIsRunning(false)
     setTenzies(false)
     setDice(allNewDice())
     setRolls(0)
+    setTime(0)
   }
 
   const diceElements = dice.map(die => (
@@ -74,6 +95,18 @@ export default function App() {
       holdDice={() => holdDice(die.id)}
     />
   ))
+
+  // Minutes calculation
+  const minutes = Math.floor((time % 360000) / 6000)
+  // Seconds calculation
+  const seconds = Math.floor((time % 6000) / 100)
+  // Milliseconds calculation
+  const milliseconds = time % 100
+
+
+  console.log(time)
+  //timer is just a formatted string representation of time
+  const timer = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}:${milliseconds.toString().padStart(2, "0")}`
 
   return (
     <main>
@@ -91,23 +124,33 @@ export default function App() {
         >
           {tenzies ? "New Game" : "Roll"}
         </button>
-        {!tenzies &&<button
+        {!tenzies && <button
           className="new-game"
           onClick={newGame}
         >
           New Game
         </button>}
       </div>
-      <div className="info-container">
+      <div className="info">
+
         <div className="rolls">
-          <p className="number-rolls">Number of rolls</p>
-          <p className="number-rolls">{rolls}</p>
+          <p className="rolls-header">Number of rolls</p>
+          <p className="rolls-count">{rolls}</p>
         </div>
+
         <div className="timer">
-          <p className="timer-count">Timer</p>
-          <p className="timer-count">00:00:00</p>
+          <p className="timer-header">Timer</p>
+          <p className="timer-count">{timer}</p>
+        </div>
+
+        <div className="best-time">
+          <p className="best-time-header">Best Time</p>
+          <p className="best-time-count">00:00:00</p>
         </div>
       </div>
+      <footer>Made by José Miguel Carvajal Jiménez</footer>
     </main>
   )
 }
+
+//TODO: ADD BEST TIME TO LOCALSTORAGE
